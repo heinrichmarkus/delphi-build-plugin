@@ -1,0 +1,45 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.gradle.publish:plugin-publish-plugin:0.9.10"
+  }
+}
+
+plugins {
+    id 'java-gradle-plugin'
+}
+
+group 'de.heinrichmarkus.gradle'
+version '0.1.7'
+
+apply plugin: 'com.gradle.plugin-publish'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+pluginBundle {
+	website = "https://github.com/heinrichmarkus/delphi-build-plugin"
+	vcsUrl = "https://github.com/heinrichmarkus/delphi-build-plugin"
+	description = "Build your Delphi Projects with Gradle"
+	tags = ['delphi', 'build']
+	
+    plugins {
+        delphiPlugin {
+            id = "de.heinrichmarkus.gradle.delphi"
+			displayName = "Delphi Build Plugin"
+        }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
