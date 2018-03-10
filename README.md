@@ -1,5 +1,6 @@
 # Delphi Build Plugin
-A Gradle Plugin to build Delphi Projects.
+
+A Gradle Plugin to build Delphi Projects. This plugin was written for build automation with Jenkins on Windows. It's tested with Delphi 10.2 Tokyo but it should also work with earlier versions.
 
 ## Features
 
@@ -97,3 +98,18 @@ noBrand | Neigther update version constant and commit constant nor write version
 noVersionDate | Don't append version constant with the build date (e.g. 0.0.1-2018-03-10_143731). | false
 assembly | List of files to be added the output ZIP-Archive. You can simply skipt this if you don't want a ZIP-Arichve to be created. |
 
+### BDS Versions
+
+BDS Version | Product
+------------|--------
+8  | Delphi XE
+9  | Delphi XE2
+10 | Delphi XE3
+11 | Delphi XE4
+12 | Delphi XE5
+14 | Delphi XE6
+15 | Delphi XE7
+16 | Delphi XE8
+17 | Delphi 10 Seattle
+18 | Delphi 10.1 Berlin
+19 | Delphi 10.2 Tokyo
