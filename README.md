@@ -113,3 +113,24 @@ BDS Version | Product
 17 | Delphi 10 Seattle
 18 | Delphi 10.1 Berlin
 19 | Delphi 10.2 Tokyo
+
+### Assembly
+
+Assemble a ZIP-Archive with any file or directory you need for delivery. The function `assembly.add()` supports the following parameters:
+
+* add(String source)
+* add(String source, Boolean optional)
+* add(String source, String destination)
+* add(String source, String destination, Boolean optional)
+
+`source` can be a file or a directory. `destination` determines a subdirectory and a different filename. You can mark a file as `optinal`. Your build will then not fail if this file doesn't exist.
+
+Here are some examples:
+
+Example | Description
+--------|------------
+assembly.add('bin/Win32/Release/Project1.exe') | Add file Project1.exe
+assembly.add('bin/Win32/Release/Project1.exe', 'Application.exe') | Add file and rename it to Application.exe
+assembly.add('bin/Win32/Release/Project1.exe', 'bin/') | Add file to the directory bin/
+assembly.add('bin/Win32/Release/Project1.exe', 'bin/Application.exe') | Add file to directory bin/ an rename it to Application.exe
+assembly.add('src/Resources') | Add the directory's content
