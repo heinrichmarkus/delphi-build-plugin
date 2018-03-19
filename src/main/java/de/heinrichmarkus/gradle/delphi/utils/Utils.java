@@ -70,9 +70,7 @@ public class Utils {
     }
 
     public static String concat(List<String> lines) {
-        StringBuilder s = new StringBuilder();
-        s.append(lines);
-        return s.toString();
+        return String.valueOf(lines);
     }
 
     public static void deleteDir(File dir) {
