@@ -6,7 +6,6 @@ import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import de.heinrichmarkus.gradle.delphi.utils.zip.ZipAdapter;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
-import org.gradle.api.provider.PropertyState;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
