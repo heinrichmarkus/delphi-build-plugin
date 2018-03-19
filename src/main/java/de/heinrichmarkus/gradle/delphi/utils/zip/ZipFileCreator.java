@@ -22,15 +22,14 @@ public class ZipFileCreator {
 
     public static void create(List<ZipFileMapping> mappings, File destFile) {
         try {
-            FileOutputStream fos = new FileOutputStream(destFile);
-            try {
+            try (FileOutputStream fos = new FileOutputStream(destFile))
+            {
                 ZipOutputStream zipOutputStream = new ZipOutputStream(fos);
-                for (ZipFileMapping m : mappings) {
+                for (ZipFileMapping m : mappings)
+                {
                     addToZip(m, zipOutputStream);
                 }
                 zipOutputStream.close();
-            } finally {
-                fos.close();
             }
         } catch (IOException e) {
             throw new CreateZipException(e);
