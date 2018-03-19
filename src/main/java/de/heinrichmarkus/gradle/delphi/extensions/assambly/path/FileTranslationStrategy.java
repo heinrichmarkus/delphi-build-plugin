@@ -27,7 +27,7 @@ public class FileTranslationStrategy extends BaseTranslationStrategy {
 
     private String getDestinationFilePath(File file) {
         if (containsDirName(item.getDestination())) {
-            if (containtsFileName(item.getDestination())) {
+            if (containsFileName(item.getDestination())) {
                 return new File(item.getDestination()).getParent();
             } else {
                 return new File(item.getDestination()).getPath();
@@ -42,14 +42,14 @@ public class FileTranslationStrategy extends BaseTranslationStrategy {
     }
 
     private String getDestinationFileName(File file) {
-        if (containtsFileName(item.getDestination())) {
+        if (containsFileName(item.getDestination())) {
             return new File(item.getDestination()).getName();
         } else {
             return file.getName();
         }
     }
 
-    private boolean containtsFileName(String str) {
+    private boolean containsFileName(String str) {
         return str != null && !str.isEmpty() && !str.endsWith("/");
     }
 }
