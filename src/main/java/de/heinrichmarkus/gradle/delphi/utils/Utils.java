@@ -95,10 +95,8 @@ public class Utils {
             }
             process.waitFor();
             return process.exitValue();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new CommandExecException(e);
-        } catch (InterruptedException ie) {
-            throw new CommandExecException(ie);
         }
     }
 
