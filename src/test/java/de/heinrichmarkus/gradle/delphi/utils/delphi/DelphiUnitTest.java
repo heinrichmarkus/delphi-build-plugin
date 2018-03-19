@@ -11,7 +11,7 @@ import java.nio.file.StandardCopyOption;
 import static org.junit.Assert.*;
 
 public class DelphiUnitTest {
-    private File fileConstants = new File("build/resources/test/Constants.pas");
+    private final File fileConstants = new File("build/resources/test/Constants.pas");
 
     @Test
     public void testReadConstant() {
