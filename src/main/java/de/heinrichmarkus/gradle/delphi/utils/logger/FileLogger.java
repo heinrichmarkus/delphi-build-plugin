@@ -39,8 +39,8 @@ public class FileLogger implements DbpLogger {
     private void createFileIfNotExists() {
         if (!file.exists()) {
             try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
+                file.getParentFile().mkdirs(); //TODO result of File.mkdirs() is ignored
+                file.createNewFile(); //TODO result of File.createNewFile() is ignored
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

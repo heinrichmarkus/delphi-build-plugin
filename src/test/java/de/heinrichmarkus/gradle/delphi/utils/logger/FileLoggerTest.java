@@ -11,10 +11,10 @@ public class FileLoggerTest {
     public void createDir() {
         File file = new File("build/resources/test/log/test.log");
         if (file.exists()) {
-            file.delete();
+            file.delete(); //TODO result of File.delete() is ignored
         }
         if (file.getParentFile().exists()) {
-            file.getParentFile().delete();
+            file.getParentFile().delete(); //TODO result of File.delete() is ignored
         }
         FileLogger logger = new FileLogger("build/resources/test/log/test.log");
         logger.log("test");

@@ -38,7 +38,7 @@ public class Assemble extends DefaultTask {
 
     private void deleteIfExists(File destFile) {
         if (destFile.exists()) {
-            destFile.delete();
+            destFile.delete();  //TODO result of File.delete() is ignored
         }
     }
 

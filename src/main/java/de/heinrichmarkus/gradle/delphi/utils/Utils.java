@@ -59,7 +59,7 @@ public class Utils {
     public static long countFiles(File dir) {
         long count = 0;
         File[] files = dir.listFiles();
-        for (File f : files) {
+        for (File f : files) { //TODO dereference of 'files' may cause NullPointerException
             if (f.isDirectory()) {
                 count += countFiles(f);
             } else {
@@ -75,14 +75,14 @@ public class Utils {
 
     public static void deleteDir(File dir) {
         File[] files = dir.listFiles();
-        for (File f : files) {
+        for (File f : files) { //TODO dereference of 'files' may cause NullPointerException
             if (f.isFile()) {
-                f.delete();
+                f.delete(); //TODO result of File.delete() is ignored
             } else {
                 deleteDir(f);
             }
         }
-        dir.delete();
+        dir.delete(); //TODO result of File.delete() is ignored
     }
 
     public static int exec(String command, List<String> envVars, File dir, DbpLogger logger) {
