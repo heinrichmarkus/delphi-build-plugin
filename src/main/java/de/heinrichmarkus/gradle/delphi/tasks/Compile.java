@@ -12,6 +12,7 @@ import de.heinrichmarkus.gradle.delphi.utils.exceptions.MsBuildFailedException;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.RsVarsNotFoundException;
 import de.heinrichmarkus.gradle.delphi.utils.logger.FileLogger;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.PropertyState;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
@@ -20,8 +21,8 @@ import java.io.File;
 import java.util.List;
 
 public class Compile extends DefaultTask {
-    private PropertyState<String> bin = getProject().property(String.class);
-    private PropertyState<String> bds = getProject().property(String.class);
+    private Property<String> bin = getProject().getObjects().property(String.class);
+    private Property<String> bds = getProject().getObjects().property(String.class);
     private MsbuildConfiguration msbuildConfiguration;
 
     @TaskAction
@@ -92,12 +93,12 @@ public class Compile extends DefaultTask {
     }
 
     @Input
-    public PropertyState<String> getBin() {
+    public Property<String> getBin() {
         return bin;
     }
 
     @Input
-    public PropertyState<String> getBds() {
+    public Property<String> getBds() {
         return bds;
     }
 
