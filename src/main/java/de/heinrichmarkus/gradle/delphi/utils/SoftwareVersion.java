@@ -15,7 +15,7 @@ public class SoftwareVersion {
     private Calendar date = new GregorianCalendar(1899, 11, 30, 12, 0);
 
     public SoftwareVersion(String version) {
-        Pattern pattern = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)\\-?(\\d{4}-\\d{2}-\\d{2}_\\d{6})?$");
+        Pattern pattern = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)-?(\\d{4}-\\d{2}-\\d{2}_\\d{6})?$");
         Matcher matcher = pattern.matcher(version);
         if (matcher.matches()) {
             major = Integer.parseInt(matcher.group(1));
