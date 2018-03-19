@@ -5,6 +5,7 @@ import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyItem;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import de.heinrichmarkus.gradle.delphi.utils.zip.ZipAdapter;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.PropertyState;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
@@ -13,8 +14,8 @@ import java.io.File;
 import java.util.List;
 
 public class Assemble extends DefaultTask {
-    private PropertyState<String> bin = getProject().property(String.class);
-    private PropertyState<String> version = getProject().property(String.class);
+    private Property<String> bin = getProject().getObjects().property(String.class);
+    private Property<String> version = getProject().getObjects().property(String.class);
     private AssemblyConfiguration assemblyConfiguration;
 
     @TaskAction
@@ -52,12 +53,12 @@ public class Assemble extends DefaultTask {
     }
 
     @Input
-    public PropertyState<String> getBin() {
+    public Property<String> getBin() {
         return bin;
     }
 
     @Input
-    public PropertyState<String> getVersion() {
+    public Property<String> getVersion() {
         return version;
     }
 
