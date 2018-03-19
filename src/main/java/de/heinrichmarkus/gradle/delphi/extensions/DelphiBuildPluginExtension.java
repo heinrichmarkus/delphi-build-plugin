@@ -4,36 +4,36 @@ import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyConfiguration
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
 import de.heinrichmarkus.gradle.delphi.extensions.test.TestConfiguration;
 import org.gradle.api.Project;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 
 public class DelphiBuildPluginExtension {
-    final PropertyState<String> bds;
-    final PropertyState<String> name;
-    final PropertyState<String> bin;
-    final PropertyState<String> version;
-    final PropertyState<Integer> versionCode;
-    final PropertyState<String> versionConstantName;
-    final PropertyState<String> versionConstantFile;
-    final PropertyState<String> commitConstantName;
-    final PropertyState<String> commitConstantFile;
-    final PropertyState<Boolean> noBrand;
-    final PropertyState<Boolean> noVersionDate;
+    final Property<String> bds;
+    final Property<String> name;
+    final Property<String> bin;
+    final Property<String> version;
+    final Property<Integer> versionCode;
+    final Property<String> versionConstantName;
+    final Property<String> versionConstantFile;
+    final Property<String> commitConstantName;
+    final Property<String> commitConstantFile;
+    final Property<Boolean> noBrand;
+    final Property<Boolean> noVersionDate;
     final MsbuildConfiguration compiler;
     final TestConfiguration test;
     final AssemblyConfiguration assembly;
 
     public DelphiBuildPluginExtension(Project project) {
-        bds = project.property(String.class);
-        name = project.property(String.class);
-        bin = project.property(String.class);
-        version = project.property(String.class);
-        versionCode = project.property(Integer.class);
-        versionConstantFile = project.property(String.class);
-        versionConstantName = project.property(String.class);
-        commitConstantFile = project.property(String.class);
-        commitConstantName = project.property(String.class);
-        noBrand = project.property(Boolean.class);
-        noVersionDate = project.property(Boolean.class);
+        bds = project.getObjects().property(String.class);
+        name = project.getObjects().property(String.class);
+        bin = project.getObjects().property(String.class);
+        version = project.getObjects().property(String.class);
+        versionCode = project.getObjects().property(Integer.class);
+        versionConstantFile = project.getObjects().property(String.class);
+        versionConstantName = project.getObjects().property(String.class);
+        commitConstantFile = project.getObjects().property(String.class);
+        commitConstantName = project.getObjects().property(String.class);
+        noBrand = project.getObjects().property(Boolean.class);
+        noVersionDate = project.getObjects().property(Boolean.class);
         compiler = new MsbuildConfiguration();
         test = new TestConfiguration();
         assembly = new AssemblyConfiguration(project);
@@ -49,7 +49,7 @@ public class DelphiBuildPluginExtension {
         assembly.getName().set(name);
     }
 
-    public PropertyState<String> getBds() {
+    public Property<String> getBds() {
         return bds;
     }
 
@@ -65,43 +65,43 @@ public class DelphiBuildPluginExtension {
         return assembly;
     }
 
-    public PropertyState<String> getName() {
+    public Property<String> getName() {
         return name;
     }
 
-    public PropertyState<String> getBin() {
+    public Property<String> getBin() {
         return bin;
     }
 
-    public PropertyState<String> getVersion() {
+    public Property<String> getVersion() {
         return version;
     }
 
-    public PropertyState<String> getVersionConstantName() {
+    public Property<String> getVersionConstantName() {
         return versionConstantName;
     }
 
-    public PropertyState<String> getVersionConstantFile() {
+    public Property<String> getVersionConstantFile() {
         return versionConstantFile;
     }
 
-    public PropertyState<String> getCommitConstantName() {
+    public Property<String> getCommitConstantName() {
         return commitConstantName;
     }
 
-    public PropertyState<String> getCommitConstantFile() {
+    public Property<String> getCommitConstantFile() {
         return commitConstantFile;
     }
 
-    public PropertyState<Boolean> getNoBrand() {
+    public Property<Boolean> getNoBrand() {
         return noBrand;
     }
 
-    public PropertyState<Boolean> getNoVersionDate() {
+    public Property<Boolean> getNoVersionDate() {
         return noVersionDate;
     }
 
-    public PropertyState<Integer> getVersionCode() {
+    public Property<Integer> getVersionCode() {
         return versionCode;
     }
 }
