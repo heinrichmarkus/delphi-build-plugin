@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestConfiguration {
-    private List<TestItem> items;
+    private final List<TestItem> items;
 
     public TestConfiguration() {
         items = new ArrayList<>();

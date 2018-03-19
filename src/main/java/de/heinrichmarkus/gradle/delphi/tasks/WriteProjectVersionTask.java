@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WriteProjectVersionTask extends DefaultTask {
-    protected final Property<String> version = getProject().getObjects().property(String.class);
-    protected final Property<Integer> versionCode = getProject().getObjects().property(Integer.class);
-    protected final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
-    protected MsbuildConfiguration msbuildConfiguration;
+    private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Integer> versionCode = getProject().getObjects().property(Integer.class);
+    private final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
+    private MsbuildConfiguration msbuildConfiguration;
 
     @TaskAction
     public void write() {

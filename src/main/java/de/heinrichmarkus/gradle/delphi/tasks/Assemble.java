@@ -14,8 +14,8 @@ import java.io.File;
 import java.util.List;
 
 public class Assemble extends DefaultTask {
-    private Property<String> bin = getProject().getObjects().property(String.class);
-    private Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<String> bin = getProject().getObjects().property(String.class);
+    private final Property<String> version = getProject().getObjects().property(String.class);
     private AssemblyConfiguration assemblyConfiguration;
 
     @TaskAction

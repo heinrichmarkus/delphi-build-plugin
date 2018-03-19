@@ -8,8 +8,8 @@ import org.gradle.api.tasks.Input;
 import java.util.Calendar;
 
 public class WriteVersionConstantTask extends DefaultWriteConstantTask {
-    protected final Property<String> version = getProject().getObjects().property(String.class);
-    protected final Property<Boolean> noDate = getProject().getObjects().property(Boolean.class);
+    private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Boolean> noDate = getProject().getObjects().property(Boolean.class);
     protected String calculateValue() {
         SoftwareVersion softwareVersion = new SoftwareVersion(version.get());
         softwareVersion.setDate(Calendar.getInstance());

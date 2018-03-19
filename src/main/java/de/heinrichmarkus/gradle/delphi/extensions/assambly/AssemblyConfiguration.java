@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AssemblyConfiguration {
     private final Property<String> name;
-    private List<AssemblyItem> items;
+    private final List<AssemblyItem> items;
 
     public AssemblyConfiguration(Project project) {
         items = new ArrayList<>();

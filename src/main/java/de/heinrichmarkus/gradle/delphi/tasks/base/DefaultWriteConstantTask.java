@@ -6,7 +6,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 public abstract class DefaultWriteConstantTask extends DefaultConstantTask {
-    final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
+    private final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
 
     @TaskAction
     public void writeConstant() {

@@ -5,9 +5,9 @@ import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyItem;
 import java.io.File;
 
 public abstract class BaseTranslationStrategy implements TranslationStrategy {
-    protected AssemblyItem item;
+    final AssemblyItem item;
 
-    public BaseTranslationStrategy(AssemblyItem item) {
+    BaseTranslationStrategy(AssemblyItem item) {
         this.item = item;
     }
 

@@ -2,7 +2,7 @@ package de.heinrichmarkus.gradle.delphi.utils.zip;
 
 import java.io.File;
 
-public class ZipFileMapping {
+class ZipFileMapping {
     private File sourceFile;
     private String destFileName;
 

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class DProjFile {
-    private File file;
+    private final File file;
 
     public DProjFile(File file) {
         this.file = file;
@@ -67,8 +67,8 @@ public class DProjFile {
     }
 
     class BaseLineProcessor implements LineProcessor {
-        protected String searchPattern;
-        protected String replacement;
+        String searchPattern;
+        String replacement;
 
         @Override
         public boolean matches(String line) {
@@ -82,77 +82,77 @@ public class DProjFile {
     }
 
     class FileVersionLineProcessor extends BaseLineProcessor {
-        public FileVersionLineProcessor(SoftwareVersion version) {
+        FileVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "FileVersion=\\d+\\.\\d+\\.\\d+\\.\\d+;";
             replacement = String.format("FileVersion=%s.0;", version.format(SoftwareVersion.Format.SHORT));
         }
     }
 
     class ProductVersionLineProcessor extends BaseLineProcessor {
-        public ProductVersionLineProcessor(SoftwareVersion version) {
+        ProductVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "ProductVersion=\\d+\\.\\d+\\.\\d+\\.\\d+;";
             replacement = String.format("ProductVersion=%s.0;", version.format(SoftwareVersion.Format.SHORT));
         }
     }
 
     class VersionNameLineProcessor extends BaseLineProcessor {
-        public VersionNameLineProcessor(SoftwareVersion version) {
+        VersionNameLineProcessor(SoftwareVersion version) {
             searchPattern = "versionName=\\d+\\.\\d+\\.\\d+\\;";
             replacement = String.format("versionName=%s;", version.format(SoftwareVersion.Format.SHORT));
         }
     }
 
     class BundleVersionLineProcessor extends BaseLineProcessor {
-        public BundleVersionLineProcessor(SoftwareVersion version) {
+        BundleVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "CFBundleVersion=\\d+\\.\\d+\\.\\d+\\;";
             replacement = String.format("CFBundleVersion=%s;", version.format(SoftwareVersion.Format.SHORT));
         }
     }
 
     class VersionCodeLineProcessor extends BaseLineProcessor {
-        public VersionCodeLineProcessor(Integer versionCode) {
+        VersionCodeLineProcessor(Integer versionCode) {
             searchPattern = "versionCode=\\d+;";
             replacement = String.format("versionCode=%d;", versionCode);
         }
     }
 
     class VersionInfoMajorLineProcessor extends BaseLineProcessor {
-        public VersionInfoMajorLineProcessor(SoftwareVersion version) {
+        VersionInfoMajorLineProcessor(SoftwareVersion version) {
             searchPattern = "<VerInfo_MajorVer>\\d+</VerInfo_MajorVer>";
             replacement = String.format("<VerInfo_MajorVer>%d</VerInfo_MajorVer>", version.getMajor());
         }
     }
 
     class VersionInfoMinoarLineProcessor extends BaseLineProcessor {
-        public VersionInfoMinoarLineProcessor(SoftwareVersion version) {
+        VersionInfoMinoarLineProcessor(SoftwareVersion version) {
             searchPattern = "<VerInfo_MinorVer>\\d+</VerInfo_MinorVer>";
             replacement = String.format("<VerInfo_MinorVer>%d</VerInfo_MinorVer>", version.getMinor());
         }
     }
 
     class VersionInfoBuildLineProcessor extends BaseLineProcessor {
-        public VersionInfoBuildLineProcessor(SoftwareVersion version) {
+        VersionInfoBuildLineProcessor(SoftwareVersion version) {
             searchPattern = "<VerInfo_Build>\\d+</VerInfo_Build>";
             replacement = String.format("<VerInfo_Build>%d</VerInfo_Build>", version.getPatch());
         }
     }
 
     class VersionInfoReleaseLineProcessor extends BaseLineProcessor {
-        public VersionInfoReleaseLineProcessor(SoftwareVersion version) {
+        VersionInfoReleaseLineProcessor(SoftwareVersion version) {
             searchPattern = "<VerInfo_Release>\\d+</VerInfo_Release>";
             replacement = String.format("<VerInfo_Release>%d</VerInfo_Release>", version.getPatch());
         }
     }
 
     private class ConfigLineProcessor extends BaseLineProcessor  {
-        public ConfigLineProcessor(String config) {
+        ConfigLineProcessor(String config) {
             searchPattern = "<Config Condition=\"'\\$\\(Config\\)'==''\">[\\d\\w]+</Config>";
             replacement = String.format("<Config Condition=\"'\\$\\(Config\\)'==''\">%s</Config>", config);
         }
     }
 
     private class PlatformLineProcessor extends BaseLineProcessor {
-        public PlatformLineProcessor(String platform) {
+        PlatformLineProcessor(String platform) {
             searchPattern = "<Platform Condition=\"'\\$\\(Platform\\)'==''\">[\\d\\w]+</Platform>";
             replacement = String.format("<Platform Condition=\"'\\$\\(Platform\\)'==''\">%s</Platform>", platform);
         }

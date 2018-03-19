@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MsbuildConfiguration {
-    private List<MsbuildItem> items;
+    private final List<MsbuildItem> items;
 
     public MsbuildConfiguration() {
         items = new ArrayList<>();

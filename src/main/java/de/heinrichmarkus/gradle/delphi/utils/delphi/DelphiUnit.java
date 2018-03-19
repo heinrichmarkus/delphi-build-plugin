@@ -11,8 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DelphiUnit {
-    File file;
-    Charset charset = StandardCharsets.ISO_8859_1;
+    private final File file;
+    private final Charset charset = StandardCharsets.ISO_8859_1;
 
     public DelphiUnit(File file) {
         this.file = file;

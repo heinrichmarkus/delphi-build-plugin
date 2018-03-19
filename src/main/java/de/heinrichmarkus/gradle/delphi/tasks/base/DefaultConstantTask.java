@@ -8,7 +8,7 @@ import org.gradle.api.tasks.Input;
 import java.io.File;
 
 public class DefaultConstantTask extends DefaultTask {
-    protected final Property<String> fileName = getProject().getObjects().property(String.class);
+    final Property<String> fileName = getProject().getObjects().property(String.class);
     protected final Property<String> constantName = getProject().getObjects().property(String.class);
 
     @Input

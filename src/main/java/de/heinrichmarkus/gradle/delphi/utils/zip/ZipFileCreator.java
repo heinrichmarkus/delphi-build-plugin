@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class ZipFileCreator {
+class ZipFileCreator {
 
     private ZipFileCreator() {
         // Hide Constructor

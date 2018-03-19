@@ -11,8 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RsVarsReader {
-    private File rsvars;
-    private Map<String, String> envVars;
+    private final File rsvars;
+    private final Map<String, String> envVars;
 
     public RsVarsReader(File rsvars) {
         this.rsvars = rsvars;

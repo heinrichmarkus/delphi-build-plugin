@@ -57,7 +57,7 @@ public class DelphiLocator {
         return new DelphiInstallation(version, rootDir);
     }
 
-    protected static String extractVersion(String key) {
+    static String extractVersion(String key) {
         Pattern pattern = Pattern.compile(".*BDS\\\\(.*)");
         Matcher matcher = pattern.matcher(key);
         if (matcher.matches()) {
@@ -73,7 +73,7 @@ public class DelphiLocator {
         return extractRootDir(lines);
     }
 
-    protected static String extractRootDir(List<String> lines) {
+    static String extractRootDir(List<String> lines) {
         Pattern pattern = Pattern.compile(".*REG_SZ\\s+(.*)");
         for (String line : lines) {
             Matcher matcher = pattern.matcher(line);

@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EnvVars {
-    private Map<String, String> vars = new LinkedHashMap<>();
+    private final Map<String, String> vars = new LinkedHashMap<>();
 
     public void put(String key, String value) {
         if (exists(key)) {

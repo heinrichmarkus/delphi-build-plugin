@@ -14,7 +14,7 @@ import org.gradle.api.tasks.TaskAction;
 import java.io.File;
 
 public class Check extends DefaultTask {
-    private Property<String> bds = getProject().getObjects().property(String.class);
+    private final Property<String> bds = getProject().getObjects().property(String.class);
     private final Property<String> binDirectory = getProject().getObjects().property(String.class);
     private MsbuildConfiguration msbuildConfiguration;
     private TestConfiguration testConfiguration;

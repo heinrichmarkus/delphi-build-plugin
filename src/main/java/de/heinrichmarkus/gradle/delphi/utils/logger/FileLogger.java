@@ -10,8 +10,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class FileLogger implements DbpLogger {
-    private File file;
-    private List<String> messages = new ArrayList<>();
+    private final File file;
+    private final List<String> messages = new ArrayList<>();
 
     public FileLogger(String file) {
         this(new File(file));

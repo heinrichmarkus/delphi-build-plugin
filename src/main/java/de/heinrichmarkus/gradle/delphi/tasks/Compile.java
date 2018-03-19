@@ -20,8 +20,8 @@ import java.io.File;
 import java.util.List;
 
 public class Compile extends DefaultTask {
-    private Property<String> bin = getProject().getObjects().property(String.class);
-    private Property<String> bds = getProject().getObjects().property(String.class);
+    private final Property<String> bin = getProject().getObjects().property(String.class);
+    private final Property<String> bds = getProject().getObjects().property(String.class);
     private MsbuildConfiguration msbuildConfiguration;
 
     @TaskAction

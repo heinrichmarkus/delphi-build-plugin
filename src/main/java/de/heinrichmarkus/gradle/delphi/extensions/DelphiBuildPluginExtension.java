@@ -7,20 +7,20 @@ import org.gradle.api.Project;
 import org.gradle.api.provider.Property;
 
 public class DelphiBuildPluginExtension {
-    final Property<String> bds;
-    final Property<String> name;
-    final Property<String> bin;
-    final Property<String> version;
-    final Property<Integer> versionCode;
-    final Property<String> versionConstantName;
-    final Property<String> versionConstantFile;
-    final Property<String> commitConstantName;
-    final Property<String> commitConstantFile;
-    final Property<Boolean> noBrand;
-    final Property<Boolean> noVersionDate;
-    final MsbuildConfiguration compiler;
-    final TestConfiguration test;
-    final AssemblyConfiguration assembly;
+    private final Property<String> bds;
+    private final Property<String> name;
+    private final Property<String> bin;
+    private final Property<String> version;
+    private final Property<Integer> versionCode;
+    private final Property<String> versionConstantName;
+    private final Property<String> versionConstantFile;
+    private final Property<String> commitConstantName;
+    private final Property<String> commitConstantFile;
+    private final Property<Boolean> noBrand;
+    private final Property<Boolean> noVersionDate;
+    private final MsbuildConfiguration compiler;
+    private final TestConfiguration test;
+    private final AssemblyConfiguration assembly;
 
     public DelphiBuildPluginExtension(Project project) {
         bds = project.getObjects().property(String.class);
