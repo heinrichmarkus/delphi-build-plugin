@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.environment;
 
-import de.heinrichmarkus.gradle.delphi.utils.environment.EnvVars;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

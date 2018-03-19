@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.logger;
 
-import de.heinrichmarkus.gradle.delphi.utils.logger.FileLogger;
 import org.junit.Test;
 
 import java.io.File;

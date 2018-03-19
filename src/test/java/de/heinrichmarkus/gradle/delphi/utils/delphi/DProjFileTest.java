@@ -1,7 +1,6 @@
 package de.heinrichmarkus.gradle.delphi.utils.delphi;
 
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
-import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import org.junit.Assert;
 import org.junit.Test;
 

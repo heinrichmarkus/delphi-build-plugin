@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils;
 
-import de.heinrichmarkus.gradle.delphi.utils.Utils;
 import org.junit.Test;
 
 import java.io.File;

@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.delphi;
 
-import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiUnit;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.UnitNotFoundException;
 import org.junit.Test;
 

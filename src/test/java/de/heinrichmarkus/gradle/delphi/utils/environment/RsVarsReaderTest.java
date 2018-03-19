@@ -1,7 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.environment;
 
-import de.heinrichmarkus.gradle.delphi.utils.environment.RsVarsReader;
-import de.heinrichmarkus.gradle.delphi.utils.environment.EnvironmentVariableNotFound;
 import org.junit.Test;
 
 import java.io.File;

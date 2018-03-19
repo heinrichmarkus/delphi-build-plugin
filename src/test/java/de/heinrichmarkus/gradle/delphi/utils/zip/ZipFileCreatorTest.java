@@ -1,7 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.zip;
 
-import de.heinrichmarkus.gradle.delphi.utils.zip.ZipFileCreator;
-import de.heinrichmarkus.gradle.delphi.utils.zip.ZipFileMapping;
 import org.junit.Test;
 
 import java.util.ArrayList;

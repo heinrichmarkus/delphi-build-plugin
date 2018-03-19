@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils;
 
-import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.SoftwareVersionParseException;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.delphi;
 
-import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiLocator;
 import org.junit.Test;
 
 import java.util.ArrayList;
