@@ -6,6 +6,7 @@ import de.heinrichmarkus.gradle.delphi.utils.Utils;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class DProjFile {
@@ -29,7 +30,7 @@ public class DProjFile {
     }
 
     public void writeVersionCode(Integer versionCode) {
-        processLines(Arrays.asList(new VersionCodeLineProcessor(versionCode)));
+        processLines(Collections.singletonList(new VersionCodeLineProcessor(versionCode)));
     }
 
     public void setConfigAndPlatform(String config, String platform) {
