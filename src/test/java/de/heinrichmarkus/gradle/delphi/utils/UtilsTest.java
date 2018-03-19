@@ -12,5 +12,4 @@ public class UtilsTest {
         File dir = new File("src/test/resources/git");
         assertEquals(3, Utils.countFiles(dir));
     }
-
 }

@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 public class DProjFileTest {
-    File projectFile = new File("build/resources/test/PGradle_Client.dproj");
+    private File projectFile = new File("build/resources/test/PGradle_Client.dproj");
 
     @Test
     public void writeVersion() throws Exception {
@@ -61,5 +61,4 @@ public class DProjFileTest {
         }
         return projectFileCopy;
     }
-
 }
