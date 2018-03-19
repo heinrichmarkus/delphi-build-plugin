@@ -22,7 +22,7 @@ The plugin is designed to work with the following project structure:
 build.gradle
 ```
 
-Althoug this is not the default Delphi project structure I recommend this to clearly seperate source files from generated files. The second thing is that the plugin's `clean` and `assemble` tasks need a single directory that contains all generated files. To accomplish this you need to update the project settings with this output dir: `..\bin\$(Platform)\$(Config)` (instead of `.\$(Platform)\$(Config)`)
+Although this is not the default Delphi project structure I recommend this to clearly separate source files from generated files. The second thing is that the plugin's `clean` and `assemble` tasks need a single directory that contains all generated files. To accomplish this you need to update the project settings with this output dir: `..\bin\$(Platform)\$(Config)` (instead of `.\$(Platform)\$(Config)`)
 
 ## Tasks
 
@@ -48,7 +48,7 @@ const
 
 ### Info
 * check - Check project configuration
-* listCompilers - Display list of Delphi instalations
+* listCompilers - Display list of Delphi installations
 * readCommit - Display commit id from source-file
 * readVersion - Display version from source-file
 
@@ -94,9 +94,9 @@ versionConstantFile | File that contains the version constant. |
 versionConstantName | Name of the version constant. |
 commitConstantFile | File that contains the commit hash constant. |
 commitConstantName| Name of the commit hash constant. |
-noBrand | Neigther update version constant and commit constant nor write version to project files. | false
+noBrand | Neither update version constant and commit constant nor write version to project files. | false
 noVersionDate | Don't append version constant with the build date (e.g. 0.0.1-2018-03-10_143731). | false
-assembly | List of files to be added the output ZIP-Archive. You can simply skipt this if you don't want a ZIP-Arichve to be created. |
+assembly | List of files to be added the output ZIP-Archive. You can simply skip this if you don't want a ZIP-Archive to be created. |
 
 ### BDS Versions
 
