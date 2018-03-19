@@ -37,20 +37,19 @@ public class ZipFileCreator {
     }
 
     private static void addToZip(ZipFileMapping mapping, ZipOutputStream zipOutputStream) throws IOException {
-        FileInputStream fis = new FileInputStream(mapping.getSourceFile());
-        try {
-            ZipEntry zipEntry = new ZipEntry(mapping.getDestFileName());
-            zipOutputStream.putNextEntry(zipEntry);
+	    try (FileInputStream fis = new FileInputStream(mapping.getSourceFile()))
+	    {
+		    ZipEntry zipEntry = new ZipEntry(mapping.getDestFileName());
+		    zipOutputStream.putNextEntry(zipEntry);
 
-            byte[] bytes = new byte[1024];
-            int length;
-            while ((length = fis.read(bytes)) >= 0) {
-                zipOutputStream.write(bytes, 0, length);
-            }
+		    byte[] bytes = new byte[1024];
+		    int length;
+		    while ((length = fis.read(bytes)) >= 0)
+		    {
+			    zipOutputStream.write(bytes, 0, length);
+		    }
 
-            zipOutputStream.closeEntry();
-        } finally {
-            fis.close();
-        }
+		    zipOutputStream.closeEntry();
+	    }
     }
 }
