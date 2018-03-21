@@ -48,21 +48,21 @@ public class ZipAdapter {
     private static List<File> readFiles(File sourceFile) {
         List<File> files = new ArrayList<>();
         if (sourceFile.isDirectory()) {
-            files.addAll(getAllFilesRecrusive(sourceFile));
+            files.addAll(getAllFilesRecursive(sourceFile));
         } else {
             files.add(sourceFile);
         }
         return files;
     }
 
-    private static List<File> getAllFilesRecrusive(File sourceFile) {
+    private static List<File> getAllFilesRecursive(File sourceFile) {
         File[] allFiles = sourceFile.listFiles();
         List<File> files = new ArrayList<>();
         for (File f : allFiles) {
             if (f.isFile()) {
                 files.add(f);
             } else {
-                files.addAll(getAllFilesRecrusive(f));
+                files.addAll(getAllFilesRecursive(f));
             }
         }
         return files;

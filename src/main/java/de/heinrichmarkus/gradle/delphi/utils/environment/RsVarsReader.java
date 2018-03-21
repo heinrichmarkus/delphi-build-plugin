@@ -21,7 +21,7 @@ public class RsVarsReader {
 
     public String read(String name) {
         if (!envVars.containsKey(name)) {
-            throw new EnvironmentVariableNotFound(String.format("Variablenname '%s'", name));
+            throw new EnvironmentVariableNotFound(String.format("Variable name '%s'", name));
         }
         return envVars.get(name);
     }

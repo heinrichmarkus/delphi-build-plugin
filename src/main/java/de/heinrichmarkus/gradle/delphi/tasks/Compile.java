@@ -9,7 +9,7 @@ import de.heinrichmarkus.gradle.delphi.utils.environment.EnvVars;
 import de.heinrichmarkus.gradle.delphi.utils.environment.RsVarsReader;
 import de.heinrichmarkus.gradle.delphi.utils.Utils;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.MsBuildFailedException;
-import de.heinrichmarkus.gradle.delphi.utils.exceptions.RsVarsNotFoundExcpetion;
+import de.heinrichmarkus.gradle.delphi.utils.exceptions.RsVarsNotFoundException;
 import de.heinrichmarkus.gradle.delphi.utils.logger.FileLogger;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.PropertyState;
@@ -86,7 +86,7 @@ public class Compile extends DefaultTask {
         File delphiLocation = DelphiLocator.locateInstallation(bds.get());
         File rsvars = new File(delphiLocation, "bin/rsvars.bat");
         if (!rsvars.exists()) {
-            throw new RsVarsNotFoundExcpetion(rsvars.getAbsolutePath());
+            throw new RsVarsNotFoundException(rsvars.getAbsolutePath());
         }
         return rsvars;
     }

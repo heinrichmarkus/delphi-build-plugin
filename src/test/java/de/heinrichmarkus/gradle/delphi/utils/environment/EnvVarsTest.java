@@ -37,9 +37,9 @@ public class EnvVarsTest {
     @Test
     public void twoVariables() {
         EnvVars envVars = new EnvVars();
-        envVars.put("path", "%eins%,%zwei%");
-        envVars.put("eins", "1");
-        envVars.put("zwei", "2");
+        envVars.put("path", "%one%,%two%");
+        envVars.put("one", "1");
+        envVars.put("two", "2");
         assertEquals("1,2", envVars.resolve("path"));
     }
 
