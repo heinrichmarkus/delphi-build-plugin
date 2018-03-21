@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils;
 
-import de.heinrichmarkus.gradle.delphi.utils.GitCommitReader;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,5 +18,4 @@ public class GitCommitReaderTest {
         assertEquals("5bf16a5c34961442bdf50293c0fdfe25621fd7f4",
                 GitCommitReader.readCommit(new File("build/resources/test/git/HEAD_DETACHED")));
     }
-
 }

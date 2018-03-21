@@ -5,7 +5,7 @@ import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WriteProjectVersionTask extends DefaultTask {
-    protected final PropertyState<String> version = getProject().property(String.class);
-    protected final PropertyState<Integer> versionCode = getProject().property(Integer.class);
-    protected final PropertyState<Boolean> disabled = getProject().property(Boolean.class);
-    protected MsbuildConfiguration msbuildConfiguration;
+    private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Integer> versionCode = getProject().getObjects().property(Integer.class);
+    private final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
+    private MsbuildConfiguration msbuildConfiguration;
 
     @TaskAction
     public void write() {
@@ -61,12 +61,12 @@ public class WriteProjectVersionTask extends DefaultTask {
     }
 
     @Input
-    public PropertyState<String> getVersion() {
+    public Property<String> getVersion() {
         return version;
     }
 
     @Input
-    public PropertyState<Integer> getVersionCode() {
+    public Property<Integer> getVersionCode() {
         return versionCode;
     }
 
@@ -80,7 +80,7 @@ public class WriteProjectVersionTask extends DefaultTask {
     }
 
     @Input
-    public PropertyState<Boolean> getDisabled() {
+    public Property<Boolean> getDisabled() {
         return disabled;
     }
 }

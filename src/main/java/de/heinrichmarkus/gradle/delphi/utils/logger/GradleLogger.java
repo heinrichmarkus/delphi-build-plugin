@@ -4,8 +4,8 @@ import org.gradle.api.logging.LogLevel;
 import org.gradle.api.logging.Logger;
 
 public class GradleLogger implements DbpLogger {
-    private Logger logger;
-    private LogLevel logLevel;
+    private final Logger logger;
+    private final LogLevel logLevel;
 
     public GradleLogger(Logger logger, LogLevel logLevel) {
         this.logger = logger;

@@ -2,14 +2,14 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 
 import de.heinrichmarkus.gradle.delphi.tasks.base.DefaultWriteConstantTask;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 
 import java.util.Calendar;
 
 public class WriteVersionConstantTask extends DefaultWriteConstantTask {
-    protected final PropertyState<String> version = getProject().property(String.class);
-    protected final PropertyState<Boolean> noDate = getProject().property(Boolean.class);
+    private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Boolean> noDate = getProject().getObjects().property(Boolean.class);
     protected String calculateValue() {
         SoftwareVersion softwareVersion = new SoftwareVersion(version.get());
         softwareVersion.setDate(Calendar.getInstance());
@@ -21,12 +21,12 @@ public class WriteVersionConstantTask extends DefaultWriteConstantTask {
     }
 
     @Input
-    public PropertyState<String> getVersion() {
+    public Property<String> getVersion() {
         return version;
     }
 
     @Input
-    public PropertyState<Boolean> getNoDate() {
+    public Property<Boolean> getNoDate() {
         return noDate;
     }
 }

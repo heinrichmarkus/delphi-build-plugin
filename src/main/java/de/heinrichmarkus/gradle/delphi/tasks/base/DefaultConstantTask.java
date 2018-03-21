@@ -2,22 +2,22 @@ package de.heinrichmarkus.gradle.delphi.tasks.base;
 
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiUnit;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 
 import java.io.File;
 
 public class DefaultConstantTask extends DefaultTask {
-    protected final PropertyState<String> fileName = getProject().property(String.class);
-    protected final PropertyState<String> constantName = getProject().property(String.class);
+    final Property<String> fileName = getProject().getObjects().property(String.class);
+    protected final Property<String> constantName = getProject().getObjects().property(String.class);
 
     @Input
-    public PropertyState<String> getFileName() {
+    public Property<String> getFileName() {
         return fileName;
     }
 
     @Input
-    public PropertyState<String> getConstantName() {
+    public Property<String> getConstantName() {
         return constantName;
     }
 

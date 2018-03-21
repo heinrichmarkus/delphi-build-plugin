@@ -22,11 +22,9 @@ public class MsbuildItem {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(file + " (");
-        sb.append(config);
-        sb.append(":" + platform);
+        sb.append(file).append(" (").append(config).append(":").append(platform);
         if (target != null && !target.isEmpty()) {
-            sb.append(":" + target);
+            sb.append(":").append(target);
         }
         sb.append(")");
         return sb.toString();

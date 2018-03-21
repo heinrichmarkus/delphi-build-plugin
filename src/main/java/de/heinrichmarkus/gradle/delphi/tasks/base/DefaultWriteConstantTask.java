@@ -1,12 +1,12 @@
 package de.heinrichmarkus.gradle.delphi.tasks.base;
 
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiUnit;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 public abstract class DefaultWriteConstantTask extends DefaultConstantTask {
-    final PropertyState<Boolean> disabled = getProject().property(Boolean.class);
+    private final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
 
     @TaskAction
     public void writeConstant() {
@@ -27,7 +27,7 @@ public abstract class DefaultWriteConstantTask extends DefaultConstantTask {
     protected abstract String calculateValue();
 
     @Input
-    public PropertyState<Boolean> getDisabled() {
+    public Property<Boolean> getDisabled() {
         return disabled;
     }
 

@@ -29,7 +29,7 @@ public class AssemblyItem {
         this.optional = optional;
     }
 
-    public boolean isDir() {
+    private boolean isDir() {
         File f = new File(source);
         return f.isDirectory();
     }

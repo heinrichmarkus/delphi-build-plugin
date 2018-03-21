@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class ZipFileCreator {
+class ZipFileCreator {
 
     private ZipFileCreator() {
         // Hide Constructor
@@ -22,15 +22,14 @@ public class ZipFileCreator {
 
     public static void create(List<ZipFileMapping> mappings, File destFile) {
         try {
-            FileOutputStream fos = new FileOutputStream(destFile);
-            try {
+            try (FileOutputStream fos = new FileOutputStream(destFile))
+            {
                 ZipOutputStream zipOutputStream = new ZipOutputStream(fos);
-                for (ZipFileMapping m : mappings) {
+                for (ZipFileMapping m : mappings)
+                {
                     addToZip(m, zipOutputStream);
                 }
                 zipOutputStream.close();
-            } finally {
-                fos.close();
             }
         } catch (IOException e) {
             throw new CreateZipException(e);
@@ -38,20 +37,19 @@ public class ZipFileCreator {
     }
 
     private static void addToZip(ZipFileMapping mapping, ZipOutputStream zipOutputStream) throws IOException {
-        FileInputStream fis = new FileInputStream(mapping.getSourceFile());
-        try {
-            ZipEntry zipEntry = new ZipEntry(mapping.getDestFileName());
-            zipOutputStream.putNextEntry(zipEntry);
+	    try (FileInputStream fis = new FileInputStream(mapping.getSourceFile()))
+	    {
+		    ZipEntry zipEntry = new ZipEntry(mapping.getDestFileName());
+		    zipOutputStream.putNextEntry(zipEntry);
 
-            byte[] bytes = new byte[1024];
-            int length;
-            while ((length = fis.read(bytes)) >= 0) {
-                zipOutputStream.write(bytes, 0, length);
-            }
+		    byte[] bytes = new byte[1024];
+		    int length;
+		    while ((length = fis.read(bytes)) >= 0)
+		    {
+			    zipOutputStream.write(bytes, 0, length);
+		    }
 
-            zipOutputStream.closeEntry();
-        } finally {
-            fis.close();
-        }
+		    zipOutputStream.closeEntry();
+	    }
     }
 }

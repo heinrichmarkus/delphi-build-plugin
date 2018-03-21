@@ -58,7 +58,7 @@ public class ZipAdapter {
     private static List<File> getAllFilesRecursive(File sourceFile) {
         File[] allFiles = sourceFile.listFiles();
         List<File> files = new ArrayList<>();
-        for (File f : allFiles) {
+        for (File f : allFiles) { //TODO result of File.delete() is ignored
             if (f.isFile()) {
                 files.add(f);
             } else {

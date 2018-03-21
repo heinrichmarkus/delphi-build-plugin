@@ -10,8 +10,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class FileLogger implements DbpLogger {
-    private File file;
-    private List<String> messages = new ArrayList<>();
+    private final File file;
+    private final List<String> messages = new ArrayList<>();
 
     public FileLogger(String file) {
         this(new File(file));
@@ -39,8 +39,8 @@ public class FileLogger implements DbpLogger {
     private void createFileIfNotExists() {
         if (!file.exists()) {
             try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
+                file.getParentFile().mkdirs(); //TODO result of File.mkdirs() is ignored
+                file.createNewFile(); //TODO result of File.createNewFile() is ignored
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

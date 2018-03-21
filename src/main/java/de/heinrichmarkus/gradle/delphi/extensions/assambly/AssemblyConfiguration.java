@@ -1,19 +1,19 @@
 package de.heinrichmarkus.gradle.delphi.extensions.assambly;
 
 import org.gradle.api.Project;
-import org.gradle.api.provider.PropertyState;
+import org.gradle.api.provider.Property;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AssemblyConfiguration {
-    private final PropertyState<String> name;
-    private List<AssemblyItem> items;
+    private final Property<String> name;
+    private final List<AssemblyItem> items;
 
     public AssemblyConfiguration(Project project) {
         items = new ArrayList<>();
-        name = project.property(String.class);
+        name = project.getObjects().property(String.class);
     }
 
     public void add(String source) {
@@ -36,7 +36,7 @@ public class AssemblyConfiguration {
         return Collections.unmodifiableList(items);
     }
 
-    public PropertyState<String> getName() {
+    public Property<String> getName() {
         return name;
     }
 }

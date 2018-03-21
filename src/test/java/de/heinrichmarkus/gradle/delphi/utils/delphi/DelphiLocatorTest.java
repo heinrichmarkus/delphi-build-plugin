@@ -1,6 +1,5 @@
 package de.heinrichmarkus.gradle.delphi.utils.delphi;
 
-import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiLocator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class DelphiLocatorTest {
     }
 
     @Test
-    public void extractRootDir() throws Exception {
+    public void extractRootDir() {
         List<String> lines = new ArrayList<>();
         lines.add("");
         lines.add("HKEY_CURRENT_USER\\Software\\Embarcadero\\BDS\\19.0");
