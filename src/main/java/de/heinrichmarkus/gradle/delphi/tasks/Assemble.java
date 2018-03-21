@@ -2,6 +2,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyConfiguration;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyItem;
+import de.heinrichmarkus.gradle.delphi.tasks.exceptions.AssemblyCreateException;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import de.heinrichmarkus.gradle.delphi.utils.zip.ZipAdapter;
 import org.gradle.api.DefaultTask;
@@ -10,6 +11,8 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public class Assemble extends DefaultTask {
@@ -38,7 +41,12 @@ public class Assemble extends DefaultTask {
 
     private void deleteIfExists(File destFile) {
         if (destFile.exists()) {
-            destFile.delete();  //TODO result of File.delete() is ignored
+            try {
+                Files.delete(destFile.toPath());
+            } catch (IOException e) {
+                throw new AssemblyCreateException(
+                        String.format("Couldn't delete old assembly %s", destFile.getAbsolutePath()), e);
+            }
         }
     }
 
