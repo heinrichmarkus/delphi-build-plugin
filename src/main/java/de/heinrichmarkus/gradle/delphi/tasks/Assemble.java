@@ -42,7 +42,7 @@ public class Assemble extends DefaultTask {
     private void deleteIfExists(File destFile) {
         if (destFile.exists()) {
             try {
-                Files.delete(destFile.toPath());
+                Files.delete(destFile.getAbsoluteFile().toPath());
             } catch (IOException e) {
                 throw new AssemblyCreateException(
                         String.format("Couldn't delete old assembly %s", destFile.getAbsolutePath()), e);
