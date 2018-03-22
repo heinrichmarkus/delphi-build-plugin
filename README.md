@@ -2,6 +2,8 @@
 
 A Gradle Plugin to build Delphi Projects. This plugin was written for build automation with Jenkins on Windows. It's tested with Delphi 10.2 Tokyo but it should also work with earlier versions.
 
+Supports Gradle `4.3` or newer.
+
 ## Features
 
 * Update all Project-Files (*.dproj) with the project version
