@@ -4,6 +4,7 @@ import de.heinrichmarkus.gradle.delphi.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,11 +40,17 @@ public class FileLogger implements DbpLogger {
     private void createFileIfNotExists() {
         if (!file.exists()) {
             try {
-                file.getParentFile().mkdirs(); //TODO result of File.mkdirs() is ignored
-                file.createNewFile(); //TODO result of File.createNewFile() is ignored
+                Files.createDirectories(file.getParentFile().getAbsoluteFile().toPath());
+                Files.createFile(file.getAbsoluteFile().toPath());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new FileLoggerException(String.format("Couldn't create log file %s", file.getAbsolutePath()), e);
             }
+        }
+    }
+
+    private class FileLoggerException extends RuntimeException {
+        private FileLoggerException(String message, Throwable cause) {
+            super(message, cause);
         }
     }
 }
