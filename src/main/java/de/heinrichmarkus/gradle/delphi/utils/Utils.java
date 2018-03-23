@@ -77,16 +77,20 @@ public class Utils {
 
     public static void deleteDir(File dir) {
         File[] files = dir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isFile()) {
-                    f.delete(); //TODO result of File.delete() is ignored
-                } else {
-                    deleteDir(f);
+        try {
+            if (files != null) {
+                for (File f : files) {
+                    if (f.isFile()) {
+                        Files.delete(f.getAbsoluteFile().toPath());
+                    } else {
+                        deleteDir(f);
+                    }
                 }
             }
+            Files.delete(dir.getAbsoluteFile().toPath());
+        } catch (IOException e) {
+            throw new UtilsIOException(String.format("Can't delete %s", dir.getAbsolutePath()), e);
         }
-        dir.delete(); //TODO result of File.delete() is ignored
     }
 
     public static int exec(String command, List<String> envVars, File dir, DbpLogger logger) {
