@@ -116,6 +116,25 @@ BDS Version | Product
 18 | Delphi 10.1 Berlin
 19 | Delphi 10.2 Tokyo
 
+### Compile
+
+You have to specify which project should be compiled for what platform. Configure as many items as you need. The function `compiler.add()` supports the following parameters:
+
+* add(String file, String config, String platform)
+* add(String file, String config, String platform, String target)
+
+Here are some examples:
+
+Example | Description
+--------|------------
+compiler.add('src/Project1.dproj', 'Release', 'Win32') | Compile for Win32
+compiler.add('src/Project1.dproj', 'Release', 'Android') | Compile for Android
+compiler.add('src/Project1.dproj', 'Release', 'Android', 'Deploy') | Additional step for the provision of an app
+compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64') | Compile for iOS
+compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy') | Additional step for the provision of an app
+
+The plugin will compile your project with msbuild.
+
 ### Assembly
 
 Assemble a ZIP-Archive with any file or directory you need for delivery. The function `assembly.add()` supports the following parameters:
