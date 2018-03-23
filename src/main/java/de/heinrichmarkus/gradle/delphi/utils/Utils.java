@@ -59,11 +59,13 @@ public class Utils {
     public static long countFiles(File dir) {
         long count = 0;
         File[] files = dir.listFiles();
-        for (File f : files) { //TODO dereference of 'files' may cause NullPointerException
-            if (f.isDirectory()) {
-                count += countFiles(f);
-            } else {
-                count++;
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    count += countFiles(f);
+                } else {
+                    count++;
+                }
             }
         }
         return count;
@@ -75,11 +77,13 @@ public class Utils {
 
     public static void deleteDir(File dir) {
         File[] files = dir.listFiles();
-        for (File f : files) { //TODO dereference of 'files' may cause NullPointerException
-            if (f.isFile()) {
-                f.delete(); //TODO result of File.delete() is ignored
-            } else {
-                deleteDir(f);
+        if (files != null) {
+            for (File f : files) {
+                if (f.isFile()) {
+                    f.delete(); //TODO result of File.delete() is ignored
+                } else {
+                    deleteDir(f);
+                }
             }
         }
         dir.delete(); //TODO result of File.delete() is ignored
