@@ -63,7 +63,7 @@ Here's an example for a simple *build.gradle* file.
 
 ```
 plugins {
-  id "de.heinrichmarkus.gradle.delphi" version "0.1.7"
+  id "de.heinrichmarkus.gradle.delphi" version "0.2.0"
 }
 
 project {

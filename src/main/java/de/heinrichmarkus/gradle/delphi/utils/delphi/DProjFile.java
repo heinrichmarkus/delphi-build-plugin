@@ -21,6 +21,7 @@ public class DProjFile {
                 new FileVersionLineProcessor(version),
                 new ProductVersionLineProcessor(version),
                 new BundleVersionLineProcessor(version),
+                new BundleShortVersionLineProcessor(version),
                 new VersionNameLineProcessor(version),
                 new VersionInfoMajorLineProcessor(version),
                 new VersionInfoMinoarLineProcessor(version),
@@ -106,6 +107,13 @@ public class DProjFile {
         BundleVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "CFBundleVersion=\\d+\\.\\d+\\.\\d+\\;";
             replacement = String.format("CFBundleVersion=%s;", version.format(SoftwareVersion.Format.SHORT));
+        }
+    }
+
+    class BundleShortVersionLineProcessor extends BaseLineProcessor {
+        BundleShortVersionLineProcessor(SoftwareVersion version) {
+            searchPattern = "CFBundleShortVersionString=\\d+\\.\\d+\\.\\d+\\;";
+            replacement = String.format("CFBundleShortVersionString=%s;", version.format(SoftwareVersion.Format.SHORT));
         }
     }
 
