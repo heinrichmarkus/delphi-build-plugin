@@ -22,6 +22,7 @@ public class DProjFileTest {
 
         String text = new String(Files.readAllBytes(projectFileCopy.toPath()), StandardCharsets.UTF_8);
         Assert.assertTrue("CFBundleVersion", text.contains("CFBundleVersion=1.2.3;"));
+        Assert.assertTrue("CFBundleShortVersionString", text.contains("CFBundleShortVersionString=1.2.3;"));
         Assert.assertTrue("FileVersion",text.contains("FileVersion=1.2.3.0;"));
         Assert.assertTrue("ProductVersion",text.contains("ProductVersion=1.2.3.0;"));
         Assert.assertTrue("versionName", text.contains("versionName=1.2.3;"));
