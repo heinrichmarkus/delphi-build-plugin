@@ -56,6 +56,9 @@ public class Compile extends DefaultTask {
         EnvVars envVars = new EnvVars();
         envVars.put(System.getenv());
         envVars.put(reader.toMap());
+        if (!envVars.exists("productversion")) {
+            envVars.put("productversion", bds.get());
+        }
         return envVars;
     }
 

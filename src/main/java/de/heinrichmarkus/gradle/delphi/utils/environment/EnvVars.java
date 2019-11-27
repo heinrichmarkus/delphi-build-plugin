@@ -21,7 +21,7 @@ public class EnvVars {
         }
     }
 
-    private boolean exists(String varName) {
+    public boolean exists(String varName) {
         return vars.containsKey(toVarName(varName));
     }
 
