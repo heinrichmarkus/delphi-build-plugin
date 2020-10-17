@@ -2,6 +2,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItem;
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
+import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItemPrepared;
 import de.heinrichmarkus.gradle.delphi.utils.LogUtils;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiLocator;
@@ -41,15 +42,20 @@ public class Compile extends DefaultTask {
         RsVarsReader reader = new RsVarsReader(getRsvarsLocation());
         String cmdMsBuild = makeBuildCommand(msbuildConfig, reader);
         EnvVars envVars = composeEnvVars(reader);
-        getLogger().info(String.format("\t\t- %s", cmdMsBuild));
+        if (getLogger().isInfoEnabled()) {
+            getLogger().info(String.format("\t\t- %s", cmdMsBuild));
+        }
         selectConfigAndPlatform(msbuildConfig);
         execCommand(cmdMsBuild, envVars.toList());
     }
 
     private void selectConfigAndPlatform(MsbuildItem msbuildConfig) {
-        File file = new File(msbuildConfig.getFile());
-        DProjFile dProjFile = new DProjFile(file);
-        dProjFile.setConfigAndPlatform(msbuildConfig.getConfig(), msbuildConfig.getPlatform());
+        if (msbuildConfig instanceof MsbuildItemPrepared) {
+            MsbuildItemPrepared preparedItem = (MsbuildItemPrepared) msbuildConfig;
+            File file = new File(msbuildConfig.getFile());
+            DProjFile dProjFile = new DProjFile(file);
+            dProjFile.setConfigAndPlatform(preparedItem.getConfig(), preparedItem.getPlatform());
+        }
     }
 
     private EnvVars composeEnvVars(RsVarsReader reader) {
@@ -65,12 +71,7 @@ public class Compile extends DefaultTask {
     private String makeBuildCommand(MsbuildItem config, RsVarsReader reader) {
         String frameworkDir = reader.read("FrameworkDir");
         File msbuild = new File(frameworkDir, "msbuild.exe");
-        String command =  String.format("%s %s /t:Build /p:config=%s /p:platform=%s", msbuild.getAbsolutePath(),
-                config.getFile(), config.getConfig(), config.getPlatform());
-        if (config.getTarget() != null && !config.getTarget().isEmpty()) {
-            command += " /target:" + config.getTarget();
-        }
-        return command;
+        return String.format("%s %s", msbuild.getAbsolutePath(), config.getMsbuildParameters());
     }
 
     private void execCommand(String command, List<String> envVars) {

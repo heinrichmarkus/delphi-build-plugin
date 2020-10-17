@@ -107,24 +107,36 @@ assembly | List of files to be added the output ZIP-Archive. You can simply skip
 
 BDS Version | Product
 ------------|--------
-8  | Delphi XE
-9  | Delphi XE2
-10 | Delphi XE3
-11 | Delphi XE4
-12 | Delphi XE5
-14 | Delphi XE6
-15 | Delphi XE7
-16 | Delphi XE8
-17 | Delphi 10 Seattle
-18 | Delphi 10.1 Berlin
-19 | Delphi 10.2 Tokyo
+8.0  | Delphi XE
+9.0  | Delphi XE2
+10.0 | Delphi XE3
+11.0 | Delphi XE4
+12.0 | Delphi XE5
+14.0 | Delphi XE6
+15.0 | Delphi XE7
+16.0 | Delphi XE8
+17.0 | Delphi 10 Seattle
+18.0 | Delphi 10.1 Berlin
+19.0 | Delphi 10.2 Tokyo
+20.0 | Delphi 10.3 Rio
+21.0 | Delphi 10.4 Sydney
 
 ### Compile
 
 You have to specify which project should be compiled for what platform. Configure as many items as you need. The function `compiler.add()` supports the following parameters:
 
+* add(String file, String customOptions)
 * add(String file, String config, String platform)
 * add(String file, String config, String platform, String target)
+* add(String file, String config, String platform, String target, String buildType)
+
+Parameter | Values | Description
+----------|--------|------------
+file | *.dproj | Delphi Project File
+config | Release, Debug, etc. | Build Configuration
+platform | Win32, Win64, Linux, Android, iOSDevice, iOSDevice64 | Target Platform
+target | Deploy | To perform an app provision
+buildType | Debug, AdHoc, AppStore | Purpose of an app provision. Only valid if `target = deploy`. Defaults to "AppStore".
 
 Here are some examples:
 
@@ -132,9 +144,11 @@ Example | Description
 --------|------------
 compiler.add('src/Project1.dproj', 'Release', 'Win32') | Compile for Win32
 compiler.add('src/Project1.dproj', 'Release', 'Android') | Compile for Android
-compiler.add('src/Project1.dproj', 'Release', 'Android', 'Deploy') | Additional step for the provision of an app
+compiler.add('src/Project1.dproj', 'Release', 'Android', 'Deploy', 'AppStore') | Additional step for the provision of an app
 compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64') | Compile for iOS
 compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy') | Additional step for the provision of an app
+compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy', 'AdHoc') | Additional step for the provision of an in-house iOS app
+compiler.add('src/Project1.dproj', '/t:Build /p:config=Release /p:platform=Win32') | Customize the msbuild options
 
 The plugin will compile your project with msbuild.
 
