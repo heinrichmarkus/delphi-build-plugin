@@ -11,12 +11,20 @@ public class MsbuildConfiguration {
         items = new ArrayList<>();
     }
 
+    public void add(String file, String customOptions) {
+        items.add(new MsbuildItemCustomized(file, customOptions));
+    }
+
     public void add(String file, String config, String platform) {
-        items.add(new MsbuildItem(file, config, platform));
+        items.add(new MsbuildItemPrepared(file, config, platform));
     }
 
     public void add(String file, String config, String platform, String target) {
-        items.add(new MsbuildItem(file, config, platform, target));
+        items.add(new MsbuildItemPrepared(file, config, platform, target));
+    }
+
+    public void add(String file, String config, String platform, String target, String buildType) {
+        items.add(new MsbuildItemPrepared(file, config, platform, target, buildType));
     }
 
     public List<MsbuildItem> getItems() {
