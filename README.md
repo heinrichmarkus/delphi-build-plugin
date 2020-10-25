@@ -136,7 +136,7 @@ file | *.dproj | Delphi Project File
 config | Release, Debug, etc. | Build Configuration
 platform | Win32, Win64, Linux, Android, iOSDevice, iOSDevice64 | Target Platform
 target | Deploy | To perform an app provision
-buildType | Debug, AdHoc, AppStore | Purpose of an app provision. Only valid if `target = deploy`. Defaults to "AppStore".
+buildType | Debug, Adhoc, AppStore | Purpose of an app provision. Only valid if `target = deploy`. Defaults to "AppStore".
 
 Here are some examples:
 
@@ -147,7 +147,7 @@ compiler.add('src/Project1.dproj', 'Release', 'Android') | Compile for Android
 compiler.add('src/Project1.dproj', 'Release', 'Android', 'Deploy', 'AppStore') | Additional step for the provision of an app
 compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64') | Compile for iOS
 compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy') | Additional step for the provision of an app
-compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy', 'AdHoc') | Additional step for the provision of an in-house iOS app
+compiler.add('src/Project1.dproj', 'Release', 'iOSDevice64', 'Deploy', 'Adhoc') | Additional step for the provision of an in-house iOS app
 compiler.add('src/Project1.dproj', '/t:Build /p:config=Release /p:platform=Win32') | Customize the msbuild options
 
 The plugin will compile your project with msbuild.

@@ -1,5 +1,5 @@
 plugins {
-    id "com.gradle.plugin-publish" version "0.9.10"
+    id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 group 'de.heinrichmarkus.gradle'
