@@ -2,6 +2,7 @@ package de.heinrichmarkus.gradle.delphi;
 
 import de.heinrichmarkus.gradle.delphi.extensions.DelphiBuildPluginExtension;
 import de.heinrichmarkus.gradle.delphi.tasks.*;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -9,6 +10,7 @@ import org.gradle.api.Project;
 public class DelphiBuildPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
+        ProjectDir.getInstance().setDir(project.getProjectDir());
         DelphiBuildPluginExtension extension = project.getExtensions().create("project", DelphiBuildPluginExtension.class, project);
         project.getTasks().create("readVersion", ReadConstantTask.class, task -> configureReadVersion(task, extension));
         project.getTasks().create("writeVersionConstant", WriteVersionConstantTask.class, task -> configureWriteVersionConstant(task, extension));

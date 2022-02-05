@@ -1,5 +1,6 @@
 package de.heinrichmarkus.gradle.delphi.utils.zip;
 
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.CreateZipException;
 
 import java.io.File;
@@ -17,7 +18,7 @@ class ZipFileCreator {
     }
 
     public static void create(List<ZipFileMapping> mappings, String destFile) {
-        create(mappings, new File(destFile));
+        create(mappings, ProjectDir.getInstance().newFile(destFile));
     }
 
     public static void create(List<ZipFileMapping> mappings, File destFile) {

@@ -2,6 +2,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItem;
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import org.gradle.api.DefaultTask;
@@ -55,7 +56,7 @@ public class WriteProjectVersionTask extends DefaultTask {
         }
         List<File> files = new ArrayList<>();
         for (String s : strings) {
-            files.add(new File(s));
+            files.add(ProjectDir.getInstance().newFile(s));
         }
         return files;
     }

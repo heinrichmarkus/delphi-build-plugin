@@ -3,6 +3,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 import de.heinrichmarkus.gradle.delphi.extensions.test.TestItem;
 import de.heinrichmarkus.gradle.delphi.extensions.test.TestConfiguration;
 import de.heinrichmarkus.gradle.delphi.utils.LogUtils;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.Utils;
 import de.heinrichmarkus.gradle.delphi.utils.environment.EnvVars;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.TestFailedException;
@@ -42,7 +43,7 @@ public class Test extends DefaultTask {
     }
 
     private File getWorkingDir(TestItem testItem) {
-        File testExe = new File(testItem.getExecutable());
+        File testExe = ProjectDir.getInstance().newFile(testItem.getExecutable());
         return testExe.getAbsoluteFile().getParentFile();
     }
 
