@@ -3,6 +3,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyConfiguration;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.AssemblyItem;
 import de.heinrichmarkus.gradle.delphi.tasks.exceptions.AssemblyCreateException;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import de.heinrichmarkus.gradle.delphi.utils.zip.ZipAdapter;
 import org.gradle.api.DefaultTask;
@@ -35,8 +36,8 @@ public class Assemble extends DefaultTask {
 
     private File calcDestFile() {
         SoftwareVersion v = new SoftwareVersion(version.get());
-        return new File(bin.get(), String.format("%s-%s.zip", assemblyConfiguration.getName().get(),
-                v.format(SoftwareVersion.Format.SHORT)));
+        return ProjectDir.getInstance().newFile(bin.get(), String.format("%s-%s.zip", assemblyConfiguration.getName().get(),
+                v.format(SoftwareVersion.Format.NO_DATE)));
     }
 
     private void deleteIfExists(File destFile) {
@@ -52,7 +53,7 @@ public class Assemble extends DefaultTask {
 
     private void reportOptionalMissingFiles(List<AssemblyItem> items) {
         for (AssemblyItem i : items) {
-            File f = new File(i.getSource());
+            File f = ProjectDir.getInstance().newFile(i.getSource());
             if (i.getOptional() && !f.exists()) {
                 getLogger().lifecycle(String.format("Skip %s", f.getName()));
             }

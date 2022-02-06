@@ -3,30 +3,35 @@ package de.heinrichmarkus.gradle.delphi.utils;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.SoftwareVersionParseException;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SoftwareVersion {
-    private int major;
-    private int minor;
-    private int patch;
+    private int major = 0;
+    private int minor = 0;
+    private int patch = 0;
+    private int build = 0;
+    private boolean printBuildNumber = false;
     private Calendar date = new GregorianCalendar(1899, 11, 30, 12, 0);
 
     public SoftwareVersion(String version) {
-        Pattern pattern = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)-?(\\d{4}-\\d{2}-\\d{2}_\\d{6})?$");
+        Pattern pattern = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)(\\.\\d+)?-?(\\d{4}-\\d{2}-\\d{2}_\\d{6})?$");
         Matcher matcher = pattern.matcher(version);
         if (matcher.matches()) {
             major = Integer.parseInt(matcher.group(1));
             minor = Integer.parseInt(matcher.group(2));
             patch = Integer.parseInt(matcher.group(3));
             if (matcher.group(4) != null) {
-                date = parseDate(matcher.group(4));
+                printBuildNumber = true;
+                build = Integer.parseInt(matcher.group(4).replace(".", ""));
+            }
+            if (matcher.group(5) != null) {
+                date = parseDate(matcher.group(5));
             }
         } else {
             throw new SoftwareVersionParseException(
-                    String.format("Software-Version '%s' is invalid. Use right format e.g.: 1.14.2-2017-06-16_084521",
+                    String.format("Software-Version '%s' is invalid. Check format (e.g.: 1.14.2-2017-06-16_084521).",
                             version));
         }
     }
@@ -49,21 +54,30 @@ public class SoftwareVersion {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
-        String dateStr = sdf.format(date.getTime());
-        return String.format("%d.%d.%d-%s", major, minor, patch, dateStr);
-    }
-
-    public String format() {
         return format(Format.FULL);
     }
 
     public String format(Format format) {
-        switch (format) {
-            case FULL: return toString();
-            case SHORT: return String.format("%d.%d.%d", major, minor, patch);
-            default: throw new IllegalArgumentException("Illegal Format");
+        if (format == Format.FULL) {
+            return format(FormatOption.INCLUDE_TIMESTAMP);
         }
+        return format();
+    }
+
+    public String format(FormatOption... options) {
+        String result = "";
+        if (printBuildNumber || Arrays.stream(options).anyMatch(o -> o == FormatOption.FORCE_BUILDNUMBER)) {
+            result = String.format("%d.%d.%d.%d", major, minor, patch, build);
+        } else {
+            result = String.format("%d.%d.%d", major, minor, patch);
+        }
+
+        if (Arrays.stream(options).anyMatch(o -> o == FormatOption.INCLUDE_TIMESTAMP)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
+            String dateStr = sdf.format(date.getTime());
+            result += String.format("-%s", dateStr);
+        }
+        return result;
     }
 
     public int getMajor() {
@@ -86,8 +100,30 @@ public class SoftwareVersion {
         this.date = date;
     }
 
+    public int getBuild() {
+        return build;
+    }
+
+    public void setBuild(int build) {
+        this.printBuildNumber = true;
+        this.build = build;
+    }
+
+    public boolean isPrintBuildNumber() {
+        return printBuildNumber;
+    }
+
+    public void setPrintBuildNumber(boolean printBuildNumber) {
+        this.printBuildNumber = printBuildNumber;
+    }
+
     public enum Format {
-        SHORT,
+        NO_DATE,
         FULL
+    }
+
+    public enum FormatOption {
+        FORCE_BUILDNUMBER,
+        INCLUDE_TIMESTAMP
     }
 }

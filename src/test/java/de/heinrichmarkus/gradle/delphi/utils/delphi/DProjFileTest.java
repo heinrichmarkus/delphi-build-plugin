@@ -28,8 +28,27 @@ public class DProjFileTest {
         Assert.assertTrue("versionName", text.contains("versionName=1.2.3;"));
         Assert.assertTrue("VerInfo_MajorVer", text.contains("<VerInfo_MajorVer>1</VerInfo_MajorVer>"));
         Assert.assertTrue("VerInfo_MinorVer", text.contains("<VerInfo_MinorVer>2</VerInfo_MinorVer>"));
-        Assert.assertTrue("VerInfo_Build", text.contains("<VerInfo_Build>3</VerInfo_Build>"));
         Assert.assertTrue("VerInfo_Release", text.contains("<VerInfo_Release>3</VerInfo_Release>"));
+        Assert.assertTrue("VerInfo_Build", text.contains("<VerInfo_Build>0</VerInfo_Build>"));
+    }
+
+    @Test
+    public void writeVersionWithBuild() throws Exception {
+        File projectFileCopy = createFreshFileCopy();
+        DProjFile dproj = new DProjFile(projectFileCopy);
+        SoftwareVersion softwareVersion = new SoftwareVersion("1.2.3.4");
+        dproj.writeVersion(softwareVersion);
+
+        String text = new String(Files.readAllBytes(projectFileCopy.toPath()), StandardCharsets.UTF_8);
+        Assert.assertTrue("CFBundleVersion", text.contains("CFBundleVersion=1.2.3.4;"));
+        Assert.assertTrue("CFBundleShortVersionString", text.contains("CFBundleShortVersionString=1.2.3.4;"));
+        Assert.assertTrue("FileVersion",text.contains("FileVersion=1.2.3.4;"));
+        Assert.assertTrue("ProductVersion",text.contains("ProductVersion=1.2.3.4;"));
+        Assert.assertTrue("versionName", text.contains("versionName=1.2.3.4;"));
+        Assert.assertTrue("VerInfo_MajorVer", text.contains("<VerInfo_MajorVer>1</VerInfo_MajorVer>"));
+        Assert.assertTrue("VerInfo_MinorVer", text.contains("<VerInfo_MinorVer>2</VerInfo_MinorVer>"));
+        Assert.assertTrue("VerInfo_Release", text.contains("<VerInfo_Release>3</VerInfo_Release>"));
+        Assert.assertTrue("VerInfo_Build", text.contains("<VerInfo_Build>4</VerInfo_Build>"));
     }
 
     @Test

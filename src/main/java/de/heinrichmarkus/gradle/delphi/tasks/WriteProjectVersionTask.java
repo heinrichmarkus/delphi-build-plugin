@@ -2,6 +2,7 @@ package de.heinrichmarkus.gradle.delphi.tasks;
 
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItem;
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import org.gradle.api.DefaultTask;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class WriteProjectVersionTask extends DefaultTask {
     private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Integer> buildNumberParam = getProject().getObjects().property(Integer.class);
     private final Property<Integer> versionCode = getProject().getObjects().property(Integer.class);
     private final Property<Boolean> disabled = getProject().getObjects().property(Boolean.class);
     private MsbuildConfiguration msbuildConfiguration;
@@ -22,11 +24,14 @@ public class WriteProjectVersionTask extends DefaultTask {
     @TaskAction
     public void write() {
         if (!disabled.get()) {
-            SoftwareVersion swVersion = new SoftwareVersion(getVersion().get());
+            SoftwareVersion sv = new SoftwareVersion(getVersion().get());
+            if (buildNumberParam.isPresent()) {
+                sv.setBuild(buildNumberParam.get());
+            }
             List<File> projectFiles = getProjectFiles();
             for (File f : projectFiles) {
                 DProjFile dproj = new DProjFile(f);
-                writeVersion(dproj, swVersion);
+                writeVersion(dproj, sv);
                 writeVersionCode(dproj);
             }
         } else {
@@ -35,7 +40,8 @@ public class WriteProjectVersionTask extends DefaultTask {
     }
 
     private void writeVersion(DProjFile dproj, SoftwareVersion swVersion) {
-        getLogger().lifecycle(String.format("Write version '%s' to %s ", version.get(), dproj.getFile().getAbsolutePath()));
+        getLogger().lifecycle(String.format("Write version '%s' to %s ", swVersion.format(SoftwareVersion.Format.NO_DATE),
+                dproj.getFile().getAbsolutePath()));
         dproj.writeVersion(swVersion);
     }
 
@@ -55,7 +61,7 @@ public class WriteProjectVersionTask extends DefaultTask {
         }
         List<File> files = new ArrayList<>();
         for (String s : strings) {
-            files.add(new File(s));
+            files.add(ProjectDir.getInstance().newFile(s));
         }
         return files;
     }
@@ -77,6 +83,10 @@ public class WriteProjectVersionTask extends DefaultTask {
 
     public void setMsbuildConfiguration(MsbuildConfiguration msbuildConfiguration) {
         this.msbuildConfiguration = msbuildConfiguration;
+    }
+
+    public Property<Integer> getBuildNumberParam() {
+        return buildNumberParam;
     }
 
     @Input

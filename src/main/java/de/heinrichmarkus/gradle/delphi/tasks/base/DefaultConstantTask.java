@@ -1,5 +1,6 @@
 package de.heinrichmarkus.gradle.delphi.tasks.base;
 
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiUnit;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
@@ -27,6 +28,6 @@ public class DefaultConstantTask extends DefaultTask {
         } else if (!constantName.isPresent()) {
             getLogger().lifecycle("No constant specified!");
         }
-        return new DelphiUnit(new File(fileName.get()));
+        return new DelphiUnit(ProjectDir.getInstance().newFile(fileName.get()));
     }
 }

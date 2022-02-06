@@ -1,5 +1,6 @@
 package de.heinrichmarkus.gradle.delphi.tasks;
 
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.Utils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.provider.Property;
@@ -13,7 +14,7 @@ public class Clean extends DefaultTask {
 
     @TaskAction
     public void cleanup() {
-        File bin = new File(binDirectory.get());
+        File bin = ProjectDir.getInstance().newFile(binDirectory.get());
         if (bin.exists()) {
             long count = Utils.countFiles(bin);
             Utils.deleteDir(bin);

@@ -85,35 +85,35 @@ public class DProjFile {
     class FileVersionLineProcessor extends BaseLineProcessor {
         FileVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "FileVersion=\\d+\\.\\d+\\.\\d+\\.\\d+;";
-            replacement = String.format("FileVersion=%s.0;", version.format(SoftwareVersion.Format.SHORT));
+            replacement = String.format("FileVersion=%s;", version.format(SoftwareVersion.FormatOption.FORCE_BUILDNUMBER));
         }
     }
 
     class ProductVersionLineProcessor extends BaseLineProcessor {
         ProductVersionLineProcessor(SoftwareVersion version) {
             searchPattern = "ProductVersion=\\d+\\.\\d+\\.\\d+\\.\\d+;";
-            replacement = String.format("ProductVersion=%s.0;", version.format(SoftwareVersion.Format.SHORT));
+            replacement = String.format("ProductVersion=%s;", version.format(SoftwareVersion.FormatOption.FORCE_BUILDNUMBER));
         }
     }
 
     class VersionNameLineProcessor extends BaseLineProcessor {
         VersionNameLineProcessor(SoftwareVersion version) {
-            searchPattern = "versionName=\\d+\\.\\d+\\.\\d+\\;";
-            replacement = String.format("versionName=%s;", version.format(SoftwareVersion.Format.SHORT));
+            searchPattern = "versionName=[\\d+\\.]+;";
+            replacement = String.format("versionName=%s;", version.format());
         }
     }
 
     class BundleVersionLineProcessor extends BaseLineProcessor {
         BundleVersionLineProcessor(SoftwareVersion version) {
-            searchPattern = "CFBundleVersion=\\d+\\.\\d+\\.\\d+\\;";
-            replacement = String.format("CFBundleVersion=%s;", version.format(SoftwareVersion.Format.SHORT));
+            searchPattern = "CFBundleVersion=[\\d+\\.]+;";
+            replacement = String.format("CFBundleVersion=%s;", version.format());
         }
     }
 
     class BundleShortVersionLineProcessor extends BaseLineProcessor {
         BundleShortVersionLineProcessor(SoftwareVersion version) {
-            searchPattern = "CFBundleShortVersionString=\\d+\\.\\d+\\.\\d+\\;";
-            replacement = String.format("CFBundleShortVersionString=%s;", version.format(SoftwareVersion.Format.SHORT));
+            searchPattern = "CFBundleShortVersionString=[\\d+\\.]+;";
+            replacement = String.format("CFBundleShortVersionString=%s;", version.format());
         }
     }
 
@@ -141,7 +141,7 @@ public class DProjFile {
     class VersionInfoBuildLineProcessor extends BaseLineProcessor {
         VersionInfoBuildLineProcessor(SoftwareVersion version) {
             searchPattern = "<VerInfo_Build>\\d+</VerInfo_Build>";
-            replacement = String.format("<VerInfo_Build>%d</VerInfo_Build>", version.getPatch());
+            replacement = String.format("<VerInfo_Build>%d</VerInfo_Build>", version.getBuild());
         }
     }
 

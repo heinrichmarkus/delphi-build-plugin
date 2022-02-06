@@ -3,6 +3,7 @@ package de.heinrichmarkus.gradle.delphi.extensions.assambly;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.path.DirTranslationStrategy;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.path.FileTranslationStrategy;
 import de.heinrichmarkus.gradle.delphi.extensions.assambly.path.TranslationStrategy;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 
 import java.io.File;
 
@@ -30,7 +31,7 @@ public class AssemblyItem {
     }
 
     private boolean isDir() {
-        File f = new File(source);
+        File f = ProjectDir.getInstance().newFile(source);
         return f.isDirectory();
     }
 

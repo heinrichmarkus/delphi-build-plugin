@@ -1,5 +1,7 @@
 package de.heinrichmarkus.gradle.delphi.utils.zip;
 
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
+
 import java.io.File;
 
 class ZipFileMapping {
@@ -12,7 +14,7 @@ class ZipFileMapping {
     }
 
     public ZipFileMapping(String sourceFile, String destFileName) {
-        this(new File(sourceFile), destFileName);
+        this(ProjectDir.getInstance().newFile(sourceFile), destFileName);
     }
 
     @Override

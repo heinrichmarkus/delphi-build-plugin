@@ -2,17 +2,25 @@ package de.heinrichmarkus.gradle.delphi;
 
 import de.heinrichmarkus.gradle.delphi.extensions.DelphiBuildPluginExtension;
 import de.heinrichmarkus.gradle.delphi.tasks.*;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
+import de.heinrichmarkus.gradle.delphi.utils.SoftwareVersion;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.provider.Property;
 
 public class DelphiBuildPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
+        ProjectDir.getInstance().setDir(project.getProjectDir());
         DelphiBuildPluginExtension extension = project.getExtensions().create("project", DelphiBuildPluginExtension.class, project);
+        Integer buildNumberParameter = buildNumberParameter(project);
+
         project.getTasks().create("readVersion", ReadConstantTask.class, task -> configureReadVersion(task, extension));
-        project.getTasks().create("writeVersionConstant", WriteVersionConstantTask.class, task -> configureWriteVersionConstant(task, extension));
-        project.getTasks().create("writeProjectVersion", WriteProjectVersionTask.class, task -> configureWriteProjectVersion(task, extension));
+        project.getTasks().create("writeVersionConstant", WriteVersionConstantTask.class,
+                task -> configureWriteVersionConstant(task, extension, buildNumberParameter));
+        project.getTasks().create("writeProjectVersion", WriteProjectVersionTask.class,
+                task -> configureWriteProjectVersion(task, extension, buildNumberParameter));
         project.getTasks().create("readCommit", ReadConstantTask.class, task -> configureReadCommit(task, extension));
         project.getTasks().create("writeCommit", WriteCommitTask.class, task -> configureWriteCommit(task, extension));
         project.getTasks().create("listCompilers", ListCompilers.class, task -> configureListCompilers(task));
@@ -23,6 +31,13 @@ public class DelphiBuildPlugin implements Plugin<Project> {
         project.getTasks().create("test", Test.class, task -> configureTestTask(task, extension));
         project.getTasks().create("assemble", Assemble.class, task -> configureAssembleTask(task, extension));
         project.getTasks().create("build", Build.class, task -> configureBuildTask(task));
+    }
+
+    private Integer buildNumberParameter(Project project) {
+        if (project.getProperties().containsKey("build")) {
+            return Integer.parseInt(project.getProperties().get("build").toString());
+        }
+        return null;
     }
 
     private void configureClean(Clean task, DelphiBuildPluginExtension extension) {
@@ -39,20 +54,24 @@ public class DelphiBuildPlugin implements Plugin<Project> {
         task.getConstantName().set(extension.getVersionConstantName());
     }
 
-    private void configureWriteVersionConstant(WriteVersionConstantTask task, DelphiBuildPluginExtension extension) {
+    private void configureWriteVersionConstant(WriteVersionConstantTask task, DelphiBuildPluginExtension extension,
+                                               Integer buildNumberParam) {
         setGroupHelp(task);
         task.setDescription("Write version to a constant in source code");
         task.getFileName().set(extension.getVersionConstantFile());
         task.getConstantName().set(extension.getVersionConstantName());
         task.getVersion().set(extension.getVersion());
+        task.getBuildNumberParam().set(buildNumberParam);
         task.getDisabled().set(extension.getNoBrand());
         task.getNoDate().set(extension.getNoVersionDate());
     }
 
-    private void configureWriteProjectVersion(WriteProjectVersionTask task, DelphiBuildPluginExtension extension) {
+    private void configureWriteProjectVersion(WriteProjectVersionTask task, DelphiBuildPluginExtension extension,
+                                              Integer buildNumberParam) {
         setGroupHelp(task);
         task.setDescription("Write version to project files");
         task.getVersion().set(extension.getVersion());
+        task.getBuildNumberParam().set(buildNumberParam);
         task.getVersionCode().set(extension.getVersionCode());
         task.setMsbuildConfiguration(extension.getCompiler());
         task.getDisabled().set(extension.getNoBrand());

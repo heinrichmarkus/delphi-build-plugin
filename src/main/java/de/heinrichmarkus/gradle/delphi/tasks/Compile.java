@@ -4,6 +4,7 @@ import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItem;
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildConfiguration;
 import de.heinrichmarkus.gradle.delphi.extensions.msbuild.MsbuildItemPrepared;
 import de.heinrichmarkus.gradle.delphi.utils.LogUtils;
+import de.heinrichmarkus.gradle.delphi.utils.ProjectDir;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DProjFile;
 import de.heinrichmarkus.gradle.delphi.utils.delphi.DelphiLocator;
 import de.heinrichmarkus.gradle.delphi.utils.environment.EnvVars;
@@ -52,7 +53,7 @@ public class Compile extends DefaultTask {
     private void selectConfigAndPlatform(MsbuildItem msbuildConfig) {
         if (msbuildConfig instanceof MsbuildItemPrepared) {
             MsbuildItemPrepared preparedItem = (MsbuildItemPrepared) msbuildConfig;
-            File file = new File(msbuildConfig.getFile());
+            File file = ProjectDir.getInstance().newFile(msbuildConfig.getFile());
             DProjFile dProjFile = new DProjFile(file);
             dProjFile.setConfigAndPlatform(preparedItem.getConfig(), preparedItem.getPlatform());
         }
@@ -76,7 +77,7 @@ public class Compile extends DefaultTask {
 
     private void execCommand(String command, List<String> envVars) {
         LogUtils.logEnvVars(getLogger(), envVars);
-        File logFile = new File(bin.get(), "log/compile.log");
+        File logFile = ProjectDir.getInstance().newFile(bin.get(), "log/compile.log");
         FileLogger fileLogger = new FileLogger(logFile);
         int exitValue = Utils.exec(command, envVars, null, fileLogger);
         fileLogger.flush();

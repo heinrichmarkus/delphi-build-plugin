@@ -9,20 +9,29 @@ import java.util.Calendar;
 
 public class WriteVersionConstantTask extends DefaultWriteConstantTask {
     private final Property<String> version = getProject().getObjects().property(String.class);
+    private final Property<Integer> buildNumberParam = getProject().getObjects().property(Integer.class);
     private final Property<Boolean> noDate = getProject().getObjects().property(Boolean.class);
+
     protected String calculateValue() {
-        SoftwareVersion softwareVersion = new SoftwareVersion(version.get());
-        softwareVersion.setDate(Calendar.getInstance());
+        SoftwareVersion sv = new SoftwareVersion(version.get());
+        sv.setDate(Calendar.getInstance());
+        if (buildNumberParam.isPresent()) {
+            sv.setBuild(buildNumberParam.get());
+        }
         SoftwareVersion.Format format = SoftwareVersion.Format.FULL;
         if (noDate.get()) {
-            format = SoftwareVersion.Format.SHORT;
+            format = SoftwareVersion.Format.NO_DATE;
         }
-        return softwareVersion.format(format);
+        return sv.format(format);
     }
 
     @Input
     public Property<String> getVersion() {
         return version;
+    }
+
+    public Property<Integer> getBuildNumberParam() {
+        return buildNumberParam;
     }
 
     @Input
