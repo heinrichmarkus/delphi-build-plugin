@@ -3,8 +3,7 @@ package de.heinrichmarkus.gradle.delphi.utils;
 import de.heinrichmarkus.gradle.delphi.utils.exceptions.SoftwareVersionParseException;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,19 +57,22 @@ public class SoftwareVersion {
         return format(Format.FULL);
     }
 
-    public String format() {
-        return format(Format.FULL);
+    public String format(Format format) {
+        if (format == Format.FULL) {
+            return format(FormatOption.INCLUDE_TIMESTAMP);
+        }
+        return format();
     }
 
-    public String format(Format format) {
+    public String format(FormatOption... options) {
         String result = "";
-        if (printBuildNumber) {
+        if (printBuildNumber || Arrays.stream(options).anyMatch(o -> o == FormatOption.FORCE_BUILDNUMBER)) {
             result = String.format("%d.%d.%d.%d", major, minor, patch, build);
         } else {
             result = String.format("%d.%d.%d", major, minor, patch);
         }
 
-        if (format == Format.FULL) {
+        if (Arrays.stream(options).anyMatch(o -> o == FormatOption.INCLUDE_TIMESTAMP)) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
             String dateStr = sdf.format(date.getTime());
             result += String.format("-%s", dateStr);
@@ -116,7 +118,12 @@ public class SoftwareVersion {
     }
 
     public enum Format {
-        SHORT,
+        NO_DATE,
         FULL
+    }
+
+    public enum FormatOption {
+        FORCE_BUILDNUMBER,
+        INCLUDE_TIMESTAMP
     }
 }

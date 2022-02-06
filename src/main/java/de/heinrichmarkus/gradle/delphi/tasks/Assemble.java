@@ -37,7 +37,7 @@ public class Assemble extends DefaultTask {
     private File calcDestFile() {
         SoftwareVersion v = new SoftwareVersion(version.get());
         return ProjectDir.getInstance().newFile(bin.get(), String.format("%s-%s.zip", assemblyConfiguration.getName().get(),
-                v.format(SoftwareVersion.Format.SHORT)));
+                v.format(SoftwareVersion.Format.NO_DATE)));
     }
 
     private void deleteIfExists(File destFile) {

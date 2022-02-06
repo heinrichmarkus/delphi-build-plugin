@@ -27,13 +27,17 @@ The plugin is designed to work with the following project structure:
 build.gradle
 ```
 
-Although this is not the default Delphi project structure I recommend this to clearly separate source files from generated files. The second thing is that the plugin's `clean` and `assemble` tasks need a single directory that contains all generated files. To accomplish this you need to update the project settings with this output dir: `..\bin\$(Platform)\$(Config)` (instead of `.\$(Platform)\$(Config)`)
+Although this is not the default Delphi project structure I recommend this to clearly separate source files from 
+generated files. The second thing is that the plugin's `clean` and `assemble` tasks need a single directory that 
+contains all generated files. To accomplish this you need to update the project settings with this output 
+dir: `..\bin\$(Platform)\$(Config)` (instead of `.\$(Platform)\$(Config)`)
 
 ## Tasks
 
 ### Build
 * assemble
-* brand - Brand the version and the commit hash to constants in your source files. You can use these constants in your source code without the need of manually updating them.
+* brand - Brand the version and the commit hash to constants in your source files. You can use these constants in 
+your source code without the need of manually updating them.
 
 ```
 const
@@ -86,22 +90,24 @@ project {
 
 ```
 
-Setting | Description | Default
---------|-------------|---------
-bin     | Directory that contains all generated files. | bin/
-bds     | Target Delphi Version. | 
-compiler | List of projects to compile. You can add the same projects multiple times for different platforms. |
-test    | List of test executables to run. Passes if the return code is 0. |
-name    | Project Name. Used as part of the ZIP-Archive's name. |
-version | Version Number. |
-versionCode | Version for Android Apps. |
-versionConstantFile | File that contains the version constant. |
-versionConstantName | Name of the version constant. |
-commitConstantFile | File that contains the commit hash constant. |
-commitConstantName| Name of the commit hash constant. |
-noBrand | Neither update version constant and commit constant nor write version to project files. | false
-noVersionDate | Don't append version constant with the build date (e.g. 0.0.1-2018-03-10_143731). | false
-assembly | List of files to be added the output ZIP-Archive. You can simply skip this if you don't want a ZIP-Archive to be created. |
+Setting | Description                                                                                                                                              | Default                                
+--------|----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------
+bin     | Directory that contains all generated files.                                                                                                             | bin/                                   
+bds     | Target Delphi Version.                                                                                                                                   | 
+compiler | List of projects to compile. You can add the same projects multiple times for different platforms.                                                      |
+test    | List of test executables to run. Passes if the return code is 0.                                                                                         |
+name    | Project Name. Used as part of the ZIP-Archive's name.                                                                                                    |
+version | Version Number. The format must be "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;.[&lt;build&gt;]" (e.g. "1.2.3", "5.6.7.8"). The build number is optional &sup1;. |
+versionCode | Version for Android Apps.                                                                                                                            |
+versionConstantFile | File that contains the version constant.                                                                                                     |
+versionConstantName | Name of the version constant.                                                                                                                |
+commitConstantFile | File that contains the commit hash constant.                                                                                                  |
+commitConstantName| Name of the commit hash constant.                                                                                                              |
+noBrand | Neither update version constant and commit constant nor write version to project files.                                                                  | false                                  
+noVersionDate | Don't append version constant with the build date (e.g. 0.0.1-2018-03-10_143731).                                                                  | false                                  
+assembly | List of files to be added the output ZIP-Archive. You can simply skip this if you don't want a ZIP-Archive to be created.                               |
+
+&sup1; The build number can be passed in from the command line by setting the property "build" (e.g. `gradle build -Pbuild=542`). 
 
 ### BDS Versions
 

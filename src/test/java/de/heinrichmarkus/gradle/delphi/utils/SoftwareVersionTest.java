@@ -56,7 +56,7 @@ public class SoftwareVersionTest {
     public void convertToShortString() {
         String versionStr = "1.14.2-2017-06-16_084521";
         SoftwareVersion version = new SoftwareVersion(versionStr);
-        assertEquals("1.14.2", version.format(SoftwareVersion.Format.SHORT));
+        assertEquals("1.14.2", version.format(SoftwareVersion.Format.NO_DATE));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class SoftwareVersionTest {
     public void convertToShortStringWithBuildNumber() {
         String versionStr = "1.14.2.123-2017-06-16_084521";
         SoftwareVersion version = new SoftwareVersion(versionStr);
-        assertEquals("1.14.2.123", version.format(SoftwareVersion.Format.SHORT));
+        assertEquals("1.14.2.123", version.format(SoftwareVersion.Format.NO_DATE));
     }
 
     @Test
@@ -78,6 +78,6 @@ public class SoftwareVersionTest {
         String versionStr = "1.14.2";
         SoftwareVersion version = new SoftwareVersion(versionStr);
         version.setBuild(123);
-        assertEquals("1.14.2.123", version.format(SoftwareVersion.Format.SHORT));
+        assertEquals("1.14.2.123", version.format(SoftwareVersion.Format.NO_DATE));
     }
 }
