@@ -51,6 +51,8 @@ public class ZipAdapterTest {
         List<AssemblyItem> list = new ArrayList<>();
         list.add(item);
         List<ZipFileMapping> mappings = ZipAdapter.toMapping(list);
+        // sort the list, because the order of the files is not guaranteed
+        mappings.sort((o1, o2) -> o1.getDestFileName().compareTo(o2.getDestFileName()));
         assertEquals(destFileNames.length, mappings.size());
         for (int i = 0; i < destFileNames.length; i++) {
             String expected = destFileNames[i].replace("/", File.separator);
